@@ -1,5 +1,5 @@
 <template>
-  <my-todo />
+  <my-setting />
 </template>
 
 <script lang="ts">

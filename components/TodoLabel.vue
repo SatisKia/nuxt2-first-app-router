@@ -27,6 +27,13 @@
 import Vue, { PropType } from 'vue'
 import { Todo } from '@/types/todo'
 
+function keta (value: number): string {
+  if (value >= 100) {
+    return '' + (value % 100)
+  }
+  return ((value < 10) ? '0' : '') + value
+}
+
 export default Vue.extend({
   props: {
     todo: {
@@ -50,7 +57,19 @@ export default Vue.extend({
     date: function (): string {
       if (!this.$props.todo) return ''
       const { date } = this.$props.todo
-      return '' + date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日'
+      if (this.$store.getters.dispYear) {
+        if (this.$store.getters.dateType === 1) {
+          return '' + date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日'
+        } else {
+          return '' + keta(date.getFullYear()) + '/' + keta(date.getMonth() + 1) + '/' + keta(date.getDate())
+        }
+      } else {
+        if (this.$store.getters.dateType === 1) {
+          return '' + (date.getMonth() + 1) + '月' + date.getDate() + '日'
+        } else {
+          return '' + keta(date.getMonth() + 1) + '/' + keta(date.getDate())
+        }
+      }
     }
   },
   beforeCreate: function () {
