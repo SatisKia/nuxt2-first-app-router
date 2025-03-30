@@ -9,10 +9,3 @@ export default Vue.extend({
   name: 'SettingPage'
 })
 </script>
-
-<style>
-.body {
-  width: 320px;
-  margin: 0;
-}
-</style>
